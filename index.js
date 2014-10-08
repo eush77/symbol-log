@@ -23,27 +23,42 @@ var symbols = extend({}, logSymbols, colors.reduce(function (symbols, color) {
 }, {}));
 
 
-/**
- * @arg {string} marker
- * @arg {string} message
- * @arg {Object} [options]
- * @property {WritableStream} [output=process.stdout]
- * @property {string} [template=" ${marker} ${message}"]
- */
-var log = function (marker, message, options) {
-  options = options || {};
-  options.output = options.output || process.stdout;
-  options.template = options.template || ' ${marker} ${message}';
-
-  options.output.write(template(options.template, {
-    marker: marker,
-    message: message
-  }) + '\n');
+var setSymbols = function (logger) {
+  Object.keys(symbols).forEach(function (key) {
+    logger[key] = function (message, options) {
+      logger(symbols[key], message, options);
+    };
+  });
+  return logger;
 };
 
 
-Object.keys(symbols).forEach(function (key) {
-  exports[key] = function (message, options) {
-    log(symbols[key], message, options);
-  };
+/**
+ * @arg {Object} [defaults]
+ * @property {WritableStream} [output=process.stdout]
+ * @property {string} [template=" ${marker} ${message}"]
+ */
+var makeLoggerWithDefaults = function (defaults) {
+  defaults = defaults || {};
+
+  return setSymbols(function (marker, message, options) {
+    if (typeof marker != 'string') {
+      // Configure logger to use predefined options for subsequent calls.
+      options = marker;
+      return makeLoggerWithDefaults(extend({}, defaults, options));
+    }
+
+    options = options || defaults;
+
+    return options.output.write(template(options.template, {
+      marker: marker,
+      message: message
+    }) + '\n');
+  });
+};
+
+
+module.exports = makeLoggerWithDefaults({
+  output: process.stdout,
+  template: ' ${marker} ${message}'
 });
