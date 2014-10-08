@@ -41,7 +41,7 @@ var setSymbols = function (logger) {
 var makeLoggerWithDefaults = function (defaults) {
   defaults = defaults || {};
 
-  return setSymbols(function (marker, message, options) {
+  return extend(setSymbols(function (marker, message, options) {
     if (typeof marker != 'string') {
       // Configure logger to use predefined options for subsequent calls.
       options = marker;
@@ -54,6 +54,8 @@ var makeLoggerWithDefaults = function (defaults) {
       marker: marker,
       message: message
     }) + '\n');
+  }), {
+    options: defaults
   });
 };
 
