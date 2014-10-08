@@ -1,6 +1,25 @@
 'use strict';
 
-var symbols = require('log-symbols');
+var logSymbols = require('log-symbols')
+  , chalk = require('chalk')
+  , extend = require('extend');
+
+
+var colors = ['black',
+              'red',
+              'green',
+              'yellow',
+              'blue',
+              'magenta',
+              'cyan',
+              'white',
+              'gray'];
+
+
+var symbols = extend({}, logSymbols, colors.reduce(function (symbols, color) {
+  symbols[color] = chalk[color]('*');
+  return symbols;
+}, {}));
 
 
 /**

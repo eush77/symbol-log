@@ -26,6 +26,8 @@
     "log-symbols"
   ],
   "dependencies": {
+    "chalk": "^0.5.1",
+    "extend": "^2.0.0",
     "log-symbols": "^1.0.1"
   },
   "devDependencies": {}
