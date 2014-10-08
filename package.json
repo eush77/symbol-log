@@ -1,0 +1,32 @@
+{
+  "name": "symbol-log",
+  "version": "0.0.0",
+  "description": "Output messages with colored markers",
+  "author": "Eugene Sharygin <eush77@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/eush77/symbol-log",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eush77/symbol-log"
+  },
+  "bugs": {
+    "url": "https://github.com/eush77/symbol-log/issues"
+  },
+  "keywords": [
+    "marker",
+    "symbol",
+    "character",
+    "figure",
+    "glyph",
+    "icon",
+    "cli",
+    "output",
+    "log",
+    "logger",
+    "log-symbols"
+  ],
+  "dependencies": {
+    "log-symbols": "^1.0.1"
+  },
+  "devDependencies": {}
+}
