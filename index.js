@@ -57,7 +57,7 @@ var makeLoggerWithDefaults = function (defaults) {
       return makeLoggerWithDefaults(extend({}, defaults, options));
     }
 
-    options = options || defaults;
+    options = extend({}, defaults, options);
 
     return options.output.write(template(options.template, {
       marker: marker,

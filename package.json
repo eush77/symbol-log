@@ -4,6 +4,9 @@
   "description": "Output messages with colored markers",
   "author": "Eugene Sharygin <eush77@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "mocha --require should test"
+  },
   "homepage": "https://github.com/eush77/symbol-log",
   "repository": {
     "type": "git",
@@ -31,5 +34,9 @@
     "lodash.template": "^2.4.1",
     "log-symbols": "^1.0.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "concat-stream": "^1.4.6",
+    "mocha": "^1.21.4",
+    "should": "^4.0.4"
+  }
 }
