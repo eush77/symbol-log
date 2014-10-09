@@ -1,7 +1,9 @@
-# symbol-log [![Dependency Status][david-badge]][david] [![DevDependency Status][david-dev-badge]][david-dev]
+# symbol-log [![Build Status][travis-badge]][travis] [![Dependency Status][david-badge]][david] [![DevDependency Status][david-dev-badge]][david-dev]
 
 [![npm](https://nodei.co/npm/symbol-log.png)](https://nodei.co/npm/symbol-log/)
 
+[travis-badge]: https://travis-ci.org/eush77/symbol-log.svg
+[travis]: https://travis-ci.org/eush77/symbol-log
 [david-badge]: https://david-dm.org/eush77/symbol-log.png
 [david]: https://david-dm.org/eush77/symbol-log
 [david-dev-badge]: https://david-dm.org/eush77/symbol-log/dev-status.png
