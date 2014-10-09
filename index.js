@@ -35,7 +35,7 @@ var setSymbols = function (logger) {
 
 /**
  * @arg {Object} [defaults]
- * @property {WritableStream} [output=process.stdout]
+ * @property {WritableStream} [output=process.stderr]
  * @property {string} [template=" ${marker} ${message}"]
  */
 var makeLoggerWithDefaults = function (defaults) {
@@ -61,6 +61,6 @@ var makeLoggerWithDefaults = function (defaults) {
 
 
 module.exports = makeLoggerWithDefaults({
-  output: process.stdout,
+  output: process.stderr,
   template: ' ${marker} ${message}'
 });
