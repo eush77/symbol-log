@@ -79,3 +79,41 @@ it('should support chaining', function (done) {
 
   output.end();
 });
+
+
+it('should provide indent/unindent transformers', function (done) {
+  var output = concat(function (data) {
+    data.split('\n').should.eql(['* - marked-0',
+                                 'unmarked-0',
+                                 '    * - marked-4',
+                                 '    unmarked-4',
+                                 '  * - marked-2',
+                                 '  unmarked-2',
+                                 '* - marked-0',
+                                 'unmarked-0',
+                                 '']);
+    done();
+  });
+
+  var outer = log({
+    output: output,
+    template: '${marker} - ${message}'
+  });
+
+  outer('*', 'marked-0');
+  outer.puts('unmarked-0');
+
+  var inner = outer.indent(4);
+  inner('*', 'marked-4');
+  inner.puts('unmarked-4');
+
+  var middle = inner.indent(-2);
+  middle('*', 'marked-2');
+  middle.puts('unmarked-2');
+
+  var outerAgain = middle.unindent(3);
+  outerAgain('*', 'marked-0');
+  outerAgain.puts('unmarked-0');
+
+  output.end();
+});

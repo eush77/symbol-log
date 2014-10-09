@@ -25,6 +25,14 @@ Options set for `logger`.
 
 Make new `logger` with modified options.
 
+### newLogger = logger.indent(level)
+
+Make new `logger` with increased indentation level.
+
+### newLogger = logger.unindent(level)
+
+Make new `logger` with decreased indentation level. Same as `logger.indent(-level)`.
+
 ### logger(marker, message, [options])
 
 Use `logger` to write the marked message.
