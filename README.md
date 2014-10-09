@@ -1,5 +1,7 @@
 # symbol-log [![Dependency Status][david-badge]][david] [![DevDependency Status][david-dev-badge]][david-dev]
 
+[![npm](https://nodei.co/npm/symbol-log.png)](https://nodei.co/npm/symbol-log/)
+
 [david-badge]: https://david-dm.org/eush77/symbol-log.png
 [david]: https://david-dm.org/eush77/symbol-log
 [david-dev-badge]: https://david-dm.org/eush77/symbol-log/dev-status.png
@@ -61,6 +63,12 @@ Four semantic markers are provided by [log-symbols](http://npmjs.org/package/log
 | cyan    | *                 |
 | white   | *                 |
 | gray    | *                 |
+
+## Install
+
+```shell
+npm install symbol-log
+```
 
 ## License
 
