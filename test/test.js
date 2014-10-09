@@ -2,7 +2,9 @@
 
 var log = require('..');
 
-var concat = require('concat-stream');
+var concat = require('concat-stream')
+  , logSymbols = require('log-symbols')
+  , chalk = require('chalk');
 
 
 it('should have the specified default options', function (done) {
@@ -53,5 +55,27 @@ it('should put unmarked messages in the order', function (done) {
 
   var out = log({ output: output });
   out.puts.apply(out, messages);
+  output.end();
+});
+
+
+it('should support chaining', function (done) {
+  var output = concat(function (data) {
+    data.split('\n').should.eql(['# - hash',
+                                 logSymbols.success + ' - success',
+                                 '---',
+                                 chalk.blue('*') + ' - blue',
+                                 '']);
+    done();
+  });
+
+  log({
+    output: output,
+    template: '${marker} - ${message}'
+  })('#', 'hash')
+    .success('success')
+    .puts('---')
+    .blue('blue');
+
   output.end();
 });

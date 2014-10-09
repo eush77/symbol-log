@@ -27,6 +27,7 @@ var setSymbols = function (logger) {
   Object.keys(symbols).forEach(function (key) {
     logger[key] = function (message, options) {
       logger(symbols[key], message, options);
+      return logger;
     };
   });
 
@@ -36,6 +37,8 @@ var setSymbols = function (logger) {
     [].forEach.call(arguments, function (message) {
       putsLogger('', message);
     });
+
+    return logger;
   };
 
   return logger;
@@ -49,8 +52,9 @@ var setSymbols = function (logger) {
  */
 var makeLoggerWithDefaults = function (defaults) {
   defaults = defaults || {};
+  var logger;
 
-  return extend(setSymbols(function (marker, message, options) {
+  return logger = extend(setSymbols(function (marker, message, options) {
     if (typeof marker != 'string') {
       // Configure logger to use predefined options for subsequent calls.
       options = marker;
@@ -59,10 +63,12 @@ var makeLoggerWithDefaults = function (defaults) {
 
     options = extend({}, defaults, options);
 
-    return options.output.write(template(options.template, {
+    options.output.write(template(options.template, {
       marker: marker,
       message: message
     }) + '\n');
+
+    return logger;
   }), {
     options: defaults
   });

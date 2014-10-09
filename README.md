@@ -29,13 +29,19 @@ Make new `logger` with modified options.
 
 Use `logger` to write the marked message.
 
+Returns `logger`.
+
 ### logger.puts([message]...)
 
 Write each unmarked message in turn. Equivalent to `logger('', message, { template: '${message}' })` (for a single argument).
 
+Returns `logger`.
+
 ### logger.*&lt;marker-name&gt;*(message, [options])
 
 Write message with one of built-in markers.
+
+Returns `logger`.
 
 ## Options
 
