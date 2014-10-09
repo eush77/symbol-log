@@ -15,19 +15,19 @@ Output messages with colored markers.
 
 ### logger = require('symbol-log')
 
-Returns new logger with default options.
+Get default `logger`.
 
 ### logger.options
 
-Options set for logger.
+Options set for `logger`.
 
 ### newLogger = logger(options)
 
-Return new logger with modified options.
+Make new `logger` with modified options.
 
 ### logger(marker, message, [options])
 
-Use logger to write the marked message.
+Use `logger` to write the marked message.
 
 ### logger.puts([message]...)
 
