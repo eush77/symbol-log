@@ -29,6 +29,15 @@ var setSymbols = function (logger) {
       logger(symbols[key], message, options);
     };
   });
+
+  logger.puts = function () {
+    var putsLogger = logger({ template: '${message}' });
+
+    [].forEach.call(arguments, function (message) {
+      putsLogger('', message);
+    });
+  };
+
   return logger;
 };
 

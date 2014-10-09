@@ -23,7 +23,11 @@ Return new logger with modified options.
 
 ### logger(marker, message, [options])
 
-Use logger to write the markered message.
+Use logger to write the marked message.
+
+### logger.puts([message]...)
+
+Write each unmarked message in turn. Equivalent to `logger('', message, { template: '${message}' })` (for a single argument).
 
 ### logger.*&lt;marker-name&gt;*(message, [options])
 
