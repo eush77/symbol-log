@@ -29,6 +29,7 @@
     "log-symbols"
   ],
   "dependencies": {
+    "ansi-styles": "^2.0.0",
     "chalk": "^0.5.1",
     "extend": "^2.0.0",
     "lodash.template": "^2.4.1",

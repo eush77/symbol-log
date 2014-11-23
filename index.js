@@ -4,19 +4,11 @@ var logSymbols = require('log-symbols')
   , chalk = require('chalk')
   , extend = require('extend')
   , template = require('lodash.template')
-  , repeatString = require('repeat-string');
+  , repeatString = require('repeat-string')
+  , ansiStyles = require('ansi-styles');
 
 
-var colors = ['black',
-              'red',
-              'green',
-              'yellow',
-              'blue',
-              'magenta',
-              'cyan',
-              'white',
-              'gray'];
-
+var colors = Object.keys(ansiStyles.colors);
 
 var symbols = extend({}, logSymbols, colors.reduce(function (symbols, color) {
   symbols[color] = chalk[color]('*');
