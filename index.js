@@ -5,15 +5,16 @@ var logSymbols = require('log-symbols')
   , extend = require('extend')
   , template = require('lodash.template')
   , repeatString = require('repeat-string')
-  , ansiStyles = require('ansi-styles');
+  , ansiStyles = require('ansi-styles')
+  , zipmap = require('zipmap');
 
 
-var colors = Object.keys(ansiStyles.colors);
-
-var symbols = extend({}, logSymbols, colors.reduce(function (symbols, color) {
-  symbols[color] = chalk[color]('*');
-  return symbols;
-}, {}));
+var symbols = extend({}, logSymbols, zipmap(Object.keys(ansiStyles.colors).map(function (color) {
+  return {
+    key: color,
+    value: chalk[color]('*')
+  };
+})));
 
 
 var loggerPrototype = {

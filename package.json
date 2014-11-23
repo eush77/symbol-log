@@ -34,7 +34,8 @@
     "extend": "^2.0.0",
     "lodash.template": "^2.4.1",
     "log-symbols": "^1.0.1",
-    "repeat-string": "^0.2.1"
+    "repeat-string": "^0.2.1",
+    "zipmap": "^1.1.1"
   },
   "devDependencies": {
     "concat-stream": "^1.4.6",
