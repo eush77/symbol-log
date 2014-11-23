@@ -66,10 +66,11 @@ var makeLogger = function (log) {
  * @property {string} [indent=""]
  */
 var makeLoggerWithDefaults = function (defaults) {
-  defaults = defaults || {};
-  defaults.output = defaults.output || process.stderr;
-  defaults.template = defaults.template || ' ${marker} ${message}';
-  defaults.indent = defaults.indent || '';
+  defaults = extend({
+    output: process.stderr,
+    template: ' ${marker} ${message}',
+    indent: ''
+  }, defaults);
 
   var logger;
 
