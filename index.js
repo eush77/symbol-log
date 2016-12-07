@@ -1,29 +1,20 @@
 'use strict';
 
-var logSymbols = require('log-symbols')
-  , chalk = require('chalk')
-  , extend = require('extend')
-  , template = require('lodash.template')
-  , repeatString = require('repeat-string')
-  , ansiStyles = require('ansi-styles')
-  , zipmap = require('zipmap');
+const ansiStyles = require('ansi-styles'),
+      chalk = require('chalk'),
+      logSymbols = require('log-symbols'),
+      pairs = require('object-pairs'),
+      repeatString = require('repeat-string'),
+      template = require('es6-template-strings');
 
 
-var symbols = extend({}, logSymbols, zipmap(Object.keys(ansiStyles.colors).map(function (color) {
-  return {
-    key: color,
-    value: chalk[color]('*')
-  };
-})));
+const loggerPrototype = {
+  puts: function (...args) {
+    const putsLogger = this({ template: '${message}' });
 
-
-var loggerPrototype = {
-  puts: function () {
-    var putsLogger = this({ template: '${message}' });
-
-    [].forEach.call(arguments, function (message) {
+    for (const message of args) {
       putsLogger('', message);
-    });
+    }
 
     return this;
   },
@@ -39,7 +30,7 @@ var loggerPrototype = {
   },
 
   unindent: function (level) {
-    var indent = this.options.indent;
+    const indent = this.options.indent;
     return this({
       indent: (indent.length < level) ? '' : indent.slice(level)
     });
@@ -47,16 +38,18 @@ var loggerPrototype = {
 };
 
 
-Object.keys(symbols).forEach(function (key) {
-  loggerPrototype[key] = function (message, options) {
-    return this(symbols[key], message, options);
-  };
-});
+// Define markers.
+Object.keys(ansiStyles.colors)
+  .map(key => [key, chalk[key]('*')])
+  .concat(pairs(logSymbols))
+  .map(([key, symbol]) => (
+    loggerPrototype[key] = function (message, options) {
+      return this(symbol, message, options);
+    }
+  ));
 
 
-var makeLogger = function (log) {
-  return extend(log, loggerPrototype);
-};
+const makeLogger = log => Object.assign(log, loggerPrototype);
 
 
 /**
@@ -65,23 +58,21 @@ var makeLogger = function (log) {
  * @property {string} [template=" ${marker} ${message}"]
  * @property {string} [indent=""]
  */
-var makeLoggerWithDefaults = function (defaults) {
-  defaults = extend({
+function makeLoggerWithDefaults (defaults) {
+  defaults = Object.assign({
     output: process.stderr,
     template: ' ${marker} ${message}',
     indent: ''
   }, defaults);
 
-  var logger;
-
-  return logger = extend(makeLogger(function (marker, message, options) {
+  const logger = Object.assign(makeLogger((marker, message, options) => {
     if (typeof marker != 'string') {
       // Configure logger to use predefined options for subsequent calls.
       options = marker;
-      return makeLoggerWithDefaults(extend({}, defaults, options));
+      return makeLoggerWithDefaults(Object.assign({}, defaults, options));
     }
 
-    options = extend({}, defaults, options);
+    options = Object.assign({}, defaults, options);
 
     options.output.write(options.indent + template(options.template, {
       marker: marker,
@@ -92,7 +83,9 @@ var makeLoggerWithDefaults = function (defaults) {
   }), {
     options: defaults
   });
-};
+
+  return logger;
+}
 
 
 module.exports = makeLoggerWithDefaults();
