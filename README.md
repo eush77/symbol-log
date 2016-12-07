@@ -1,15 +1,19 @@
-# symbol-log [![Build Status][travis-badge]][travis] [![Dependency Status][david-badge]][david] [![DevDependency Status][david-dev-badge]][david-dev]
-
 [![npm](https://nodei.co/npm/symbol-log.png)](https://nodei.co/npm/symbol-log/)
+
+# symbol-log
+
+[![Build Status][travis-badge]][travis]
+[![Dependency Status][david-badge]][david]
 
 [travis-badge]: https://travis-ci.org/eush77/symbol-log.svg
 [travis]: https://travis-ci.org/eush77/symbol-log
 [david-badge]: https://david-dm.org/eush77/symbol-log.png
 [david]: https://david-dm.org/eush77/symbol-log
-[david-dev-badge]: https://david-dm.org/eush77/symbol-log/dev-status.png
-[david-dev]: https://david-dm.org/eush77/symbol-log#info=devDependencies
 
-Output messages with colored markers.
+Helper library for printing log messages in color with log markers. [chalk] meets [log-symbols].
+
+[chalk]: https://npmjs.com/package/chalk
+[log-symbols]: https://npmjs.com/package/log-symbols
 
 ## API
 
@@ -53,12 +57,10 @@ Returns `logger`.
 
 ## Options
 
-| Option   | Type           | Required? | Default                   |
-| :------- | :------------- | :-------: | :------------------------ |
-| output   | WritableStream | No        | `process.stderr`          |
-| template | string         | No        | `" ${marker} ${message}"` |
-
-Templating syntax is [LoDash's](https://lodash.com/docs#template).
+Option | Type | Default | Description
+:----: | ---- | :-----: | -----------
+output | WritableStream | `process.stderr` | Output stream.
+template | String | `" ${marker} ${message}"` | Output template.
 
 ## Markers
 
@@ -82,7 +84,7 @@ Four semantic markers are provided by [log-symbols](http://npmjs.org/package/log
 
 ## Install
 
-```shell
+```
 npm install symbol-log
 ```
 

@@ -1,7 +1,7 @@
 {
   "name": "symbol-log",
   "version": "0.1.1",
-  "description": "Output messages with colored markers",
+  "description": "Helpers for printing log messages in color with markers",
   "author": "Eugene Sharygin <eush77@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -17,9 +17,11 @@
   },
   "keywords": [
     "marker",
+    "color",
+    "line",
+    "message",
     "symbol",
     "character",
-    "figure",
     "glyph",
     "icon",
     "cli",
